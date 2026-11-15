@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>lab-smk.xyz • Laboratorium TJKT</title>
+<meta name="description" content="Landing page lab-smk.xyz — Admin Lab/Web: Ananda Bagas Khalil Hadhi, Kelas XII TJKT 1.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23f09433'/%3E%3Cstop offset='.5' stop-color='%23dc2743'/%3E%3Cstop offset='1' stop-color='%23bc1888'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Crect x='16' y='16' width='32' height='12' rx='3' fill='none' stroke='white' stroke-width='3'/%3E%3Crect x='16' y='36' width='32' height='12' rx='3' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #fafafa;
+    --surface: #ffffff;
+    --border: #dbdbdb;
+    --text: #262626;
+    --text-soft: #737373;
+    --blue: #0095f6;
+    --blue-hover: #1877f2;
+    --heart: #ed4956;
+    --overlay: rgba(0, 0, 0, 0.65);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  }
+  :root[data-theme="dark"] {
+    --bg: #000000;
+    --bg-soft: #121212;
+    --surface: #121212;
+    --border: #262626;
+    --text: #f5f5f5;
+    --text-soft: #a8a8a8;
+    --overlay: rgba(0, 0, 0, 0.8);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.4;
+    transition: background 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.no-scroll { overflow: hidden; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  svg { display: block; }
+
+  /* ===== Top Navbar ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .topbar-inner {
+    max-width: 935px; margin: 0 auto;
+    height: 56px; padding: 0 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand {
+    font-family: "Snell Roundhand", "Segoe Script", "Brush Script MT", "Apple Chancery", cursive;
+    font-size: 28px; font-weight: 700; letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 12px; font-weight: 600;
+    padding: 6px 11px; border-radius: 999px;
+    background: var(--bg-soft); border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #31d158; position: relative;
+  }
+  .status-dot::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid #31d158; opacity: 0;
+    animation: ping 1.8s ease-out infinite;
+  }
+  @keyframes ping { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.4); opacity: 0; } }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .icon-btn:hover { background: var(--bg-soft); }
+  .icon-btn:active { transform: scale(0.9); }
+  .icon-btn svg { width: 22px; height: 22px; }
+  .theme-sun { display: none; }
+  :root[data-theme="dark"] .theme-sun { display: block; }
+  :root[data-theme="dark"] .theme-moon { display: none; }
+
+  /* ===== Layout ===== */
+  .container { max-width: 935px; margin: 0 auto; padding: 0 16px; }
+
+  /* ===== Profile ===== */
+  .profile {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 22px; row-gap: 14px;
+    padding: 22px 0 8px;
+    align-items: center;
+  }
+  .avatar-ring {
+    grid-row: span 1;
+    width: 86px; height: 86px; border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    display: grid; place-items: center;
+    animation: ringspin 8s linear infinite;
+  }
+  @keyframes ringspin { to { filter: hue-rotate(360deg); } }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--bg); padding: 3px;
+    transition: background 0.25s ease;
+  }
+  .avatar {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: linear-gradient(135deg, #0f2027, #203a43 55%, #2c5364);
+    display: grid; place-items: center; color: #fff;
+  }
+  .avatar svg { width: 52%; height: 52%; }
+
+  .profile-head { min-width: 0; }
+  .username-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .username { font-size: 20px; font-weight: 400; word-break: break-all; }
+  .verified { width: 18px; height: 18px; flex: none; }
+  .role-chip {
+    display: inline-block; margin-top: 8px;
+    font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 8px;
+    background: var(--bg-soft); border: 1px solid var(--border);
+  }
+
+  .stats {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 6px;
+    transition: border-color 0.25s ease;
+  }
+  .stat { text-align: center; padding: 12px 4px; }
+  .stat b { display: block; font-size: 16px; font-weight: 600; }
+  .stat span { font-size: 13px; color: var(--text-soft); }
+
+  .bio { grid-column: 1 / -1; font-size: 14px; }
+  .bio .real-name { font-weight: 600; display: block; }
+  .bio .meta { color: var(--text-soft); display: block; margin: 2px 0 6px; }
+  .bio p { max-width: 560px; }
+  .bio .link { color: #00376b; font-weight: 600; display: inline-block; margin-top: 6px; }
+  :root[data-theme="dark"] .bio .link { color: #e0f1ff; }
+
+  .actions { grid-column: 1 / -1; display: flex; gap: 8px; }
+  .btn {
+    flex: 1; padding: 8px 14px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-align: center;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-hover); }
+  .btn-secondary { background: var(--bg-soft); border: 1px solid var(--border); }
+  .btn-secondary:hover { filter: brightness(0.96); }
+
+  /* ===== Highlights ===== */
+  .highlights {
+    display: flex; gap: 18px;
+    overflow-x: auto; padding: 18px 2px 16px;
+    scrollbar-width: none;
+  }
+  .highlights::-webkit-scrollbar { display: none; }
+  .hl { flex: none; width: 76px; text-align: center; }
+  .hl-ring {
+    width: 70px; height: 70px; margin: 0 auto 6px;
+    border-radius: 50%; padding: 2px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    transition: transform 0.2s ease;
+  }
+  .hl:hover .hl-ring { transform: scale(1.06); }
+  .hl:active .hl-ring { transform: scale(0.95); }
+  .hl.seen .hl-ring { background: var(--border); }
+  .hl-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    border: 2px solid var(--bg); display: grid; place-items: center; color: #fff;
+  }
+  .hl-inner svg { width: 46%; height: 46%; }
+  .hl span { font-size: 12px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ===== Tabs ===== */
+  .tabs {
+    display: flex; justify-content: center;
+    border-top: 1px solid var(--border);
+    transition: border-color 0.25s ease;
+  }
+  .tab {
+    display: flex; align-items: center; gap: 6px;
+    padding: 14px 8px; margin-top: -1px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    border-top: 1px solid var(--text);
+  }
+  .tab svg { width: 14px; height: 14px; }
+
+  /* ===== Feed Grid ===== */
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3px; padding-bottom: 8px;
+  }
+  .cell {
+    position: relative; aspect-ratio: 1 / 1;
+    overflow: hidden; cursor: pointer; color: #fff;
+    display: grid; place-items: center;
+  }
+  .cell-art { position: absolute; inset: 0; }
+  .cell-icon { position: relative; width: 38%; height: 38%; opacity: 0.95; transition: transform 0.3s ease; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25)); }
+  .cell:hover .cell-icon { transform: scale(1.08); }
+  .cell-tag {
+    position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; opacity: 0.95;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+  }
+  .cell-hover {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.38);
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    font-weight: 700; font-size: 15px; opacity: 0; transition: opacity 0.2s ease;
+  }
+  .cell:hover .cell-hover, .cell:focus-visible .cell-hover { opacity: 1; }
+  .cell-hover span { display: inline-flex; align-items: center; gap: 6px; }
+  .cell-hover svg { width: 20px; height: 20px; fill: #fff; }
+  .cell:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 28px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-soft);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .footer-inner {
+    max-width: 935px; margin: 0 auto;
+    padding: 36px 16px calc(36px + env(safe-area-inset-bottom));
+    text-align: center;
+  }
+  .footer-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .footer-sub { font-size: 14px; color: var(--text-soft); max-width: 460px; margin: 0 auto 20px; }
+  .monitor-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 14px 26px; border-radius: 12px;
+    font-size: 15px; font-weight: 700; color: #fff;
+    background: var(--ig-gradient); background-size: 160% 160%; background-position: 0% 50%;
+    box-shadow: 0 8px 22px rgba(220, 39, 67, 0.32);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.5s ease;
+    max-width: 100%;
+  }
+  .monitor-btn svg { width: 20px; height: 20px; flex: none; transition: transform 0.2s ease; }
+  .monitor-btn:hover { transform: translateY(-2px); background-position: 100% 50%; box-shadow: 0 12px 28px rgba(220, 39, 67, 0.42); }
+  .monitor-btn:hover svg { transform: translateX(3px); }
+  .monitor-btn:active { transform: translateY(0) scale(0.98); }
+  .monitor-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .copy { margin-top: 22px; font-size: 12px; color: var(--text-soft); }
+
+  /* ===== Modal base ===== */
+  .modal {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--overlay);
+    display: none; align-items: center; justify-content: center;
+    padding: 16px; backdrop-filter: blur(3px);
+  }
+  .modal.open { display: flex; animation: fade 0.2s ease; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-close {
+    position: fixed; top: 12px; right: 12px; z-index: 110;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff;
+    background: rgba(255,255,255,0.12);
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.22); }
+  .modal-close svg { width: 22px; height: 22px; }
+
+  /* ===== Story modal ===== */
+  .story {
+    position: relative; width: min(420px, 100%); height: min(86vh, 760px);
+    border-radius: 14px; overflow: hidden; color: #fff;
+    display: flex; flex-direction: column;
+    animation: pop 0.25s ease; user-select: none; -webkit-user-select: none;
+    box-shadow: var(--shadow);
+  }
+  .story-bg { position: absolute; inset: 0; transition: background 0.3s ease; }
+  .story-bars { position: relative; z-index: 2; display: flex; gap: 4px; padding: 12px 12px 0; }
+  .bar { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.35); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: #fff; }
+  .bar.done i { width: 100%; }
+  .bar.active i { animation: fill 4.5s linear forwards; }
+  .story.paused .bar.active i { animation-play-state: paused; }
+  @keyframes fill { from { width: 0; } to { width: 100%; } }
+  .story-head { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 12px; }
+  .mini-av {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.8);
+    display: grid; place-items: center;
+  }
+  .mini-av svg { width: 18px; height: 18px; }
+  .story-head b { font-size: 14px; }
+  .story-head small { opacity: 0.8; font-size: 12px; margin-left: 6px; }
+  .story-body {
+    position: relative; z-index: 2; flex: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 20px 28px 48px; gap: 18px;
+  }
+  .story-icon {
+    width: 108px; height: 108px; border-radius: 28px;
+    background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.35);
+    display: grid; place-items: center; backdrop-filter: blur(6px);
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float { 50% { transform: translateY(-8px); } }
+  .story-icon svg { width: 56%; height: 56%; }
+  .story-body h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.3px; }
+  .story-body p { font-size: 15px; line-height: 1.5; opacity: 0.95; max-width: 320px; }
+  .story-zones { position: absolute; inset: 0; z-index: 1; display: flex; }
+  .story-zones div { flex: 1; }
+  .story-zones div:first-child { flex: 0 0 33%; }
+  .story-cta {
+    position: absolute; z-index: 3; left: 0; right: 0; bottom: 14px;
+    text-align: center; font-size: 12px; opacity: 0.8;
+  }
+
+  /* ===== Post modal ===== */
+  .post {
+    position: relative; width: min(960px, 100%); max-height: 92vh;
+    background: var(--surface); border-radius: 12px; overflow: hidden;
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    animation: pop 0.25s ease; box-shadow: var(--shadow);
+  }
+  .post-media {
+    position: relative; aspect-ratio: 1 / 1; color: #fff;
+    display: grid; place-items: center; overflow: hidden; cursor: pointer;
+    user-select: none; -webkit-user-select: none;
+  }
+  .post-media .art { position: absolute; inset: 0; }
+  .post-media .big-icon { position: relative; width: 36%; height: 36%; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.3)); }
+  .post-media .media-label {
+    position: absolute; left: 14px; bottom: 14px; right: 14px;
+    font-size: 12px; font-weight: 600; opacity: 0.9;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+  .burst {
+    position: absolute; left: 50%; top: 50%; width: 110px; height: 110px;
+    margin: -55px 0 0 -55px; fill: #fff; pointer-events: none;
+    opacity: 0; transform: scale(0.2); filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
+  }
+  .burst.go { animation: burst 0.8s ease; }
+  @keyframes burst {
+    0% { opacity: 0; transform: scale(0.2); }
+    20% { opacity: 1; transform: scale(1.15); }
+    40% { transform: scale(0.95); }
+    70% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+  }
+  .post-side { display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--border); }
+  .post-top {
+    display: flex; align-items: center; gap: 10px; padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tiny-ring { width: 34px; height: 34px; border-radius: 50%; padding: 2px; background: var(--ig-gradient); flex: none; }
+  .tiny-ring div {
+    width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--surface);
+    background: linear-gradient(135deg, #0f2027, #2c5364); display: grid; place-items: center; color: #fff;
+  }
+  .tiny-ring svg { width: 55%; height: 55%; }
+  .post-top .who { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+  .post-top .who svg { width: 14px; height: 14px; }
+  .post-scroll { flex: 1; overflow-y: auto; padding: 14px 16px; min-height: 90px; }
+  .caption-row { font-size: 14px; margin-bottom: 14px; }
+  .caption-row b { font-weight: 600; margin-right: 6px; }
+  .caption-row .tags { color: #00376b; display: block; margin-top: 6px; }
+  :root[data-theme="dark"] .caption-row .tags { color: #e0f1ff; }
+  .cmt { font-size: 14px; margin-bottom: 10px; }
+  .cmt b { font-weight: 600; margin-right: 6px; }
+  .post-actions { padding: 8px 12px 0; display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--border); }
+  .act { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; transition: transform 0.15s ease; }
+  .act:active { transform: scale(0.85); }
+  .act svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .act.like.liked svg { fill: var(--heart); stroke: var(--heart); animation: beat 0.4s ease; }
+  .act.save.saved svg { fill: currentColor; }
+  .act.save { margin-left: auto; }
+  @keyframes beat { 0% { transform: scale(1); } 40% { transform: scale(1.3); } 100% { transform: scale(1); } }
+  .likes { padding: 2px 16px 0; font-size: 14px; font-weight: 600; }
+  .when { padding: 4px 16px 14px; font-size: 11px; letter-spacing: 0.4px; text-transform: uppercase; color: var(--text-soft); }
+
+  /* ===== Responsive ===== */
+  @media (min-width: 736px) {
+    .container { padding: 0 20px; }
+    .profile { grid-template-columns: 200px 1fr; column-gap: 30px; padding-top: 34px; align-items: start; }
+    .avatar-ring { width: 150px; height: 150px; padding: 4px; margin: 0 auto; grid-row: span 4; }
+    .username { font-size: 24px; }
+    .verified { width: 22px; height: 22px; }
+    .stats { grid-column: 2; border: none; margin: 0; }
+    .stat { text-align: left; padding: 0; }
+    .stat b { display: inline; font-size: 16px; }
+    .stat span { font-size: 16px; color: var(--text); margin-left: 4px; }
+    .stats { display: flex; gap: 40px; }
+    .bio, .actions { grid-column: 2; }
+    .actions .btn { flex: 0 0 auto; min-width: 150px; }
+    .hl { width: 105px; }
+    .hl-ring { width: 86px; height: 86px; padding: 3px; margin-bottom: 8px; }
+    .highlights { gap: 30px; padding: 30px 4px 36px; }
+    .grid { gap: 22px; }
+    .cell { border-radius: 4px; }
+    .tab { font-size: 12px; }
+  }
+  @media (max-width: 735px) {
+    .post { grid-template-columns: 1fr; max-height: 94vh; overflow-y: auto; }
+    .post-side { border-left: none; border-top: 1px solid var(--border); }
+    .post-scroll { max-height: 220px; }
+    .cell-hover { font-size: 12px; gap: 10px; }
+    .cell-hover svg { width: 15px; height: 15px; }
+    .status-pill { padding: 5px 9px; font-size: 11px; }
+  }
+  @media (max-width: 380px) {
+    .brand { font-size: 24px; }
+    .status-pill { font-size: 10.5px; }
+    .monitor-btn { padding: 13px 18px; font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Top Navbar ===== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#" aria-label="lab-smk.xyz">lab-smk.xyz</a>
+    <div class="nav-right">
+      <span class="status-pill" role="status"><span class="status-dot"></span>Lab Online</span>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Ganti tema Gelap/Terang" title="Ganti tema">
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ===== Profile ===== -->
+  <section class="profile" aria-label="Profil">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <div class="avatar" role="img" aria-label="Ikon server dan jaringan">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="6" width="30" height="11" rx="3"/>
+            <rect x="9" y="21" width="30" height="11" rx="3"/>
+            <circle cx="15" cy="11.5" r="1.2" fill="currentColor"/>
+            <circle cx="15" cy="26.5" r="1.2" fill="currentColor"/>
+            <path d="M24 32v5M24 37H12v4M24 37h12v4"/>
+            <circle cx="12" cy="42" r="1.8"/><circle cx="36" cy="42" r="1.8"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-head">
+      <div class="username-row">
+        <h1 class="username">lab-smk.xyz</h1>
+        <svg class="verified" viewBox="0 0 40 40" aria-label="Terverifikasi" role="img">
+          <path fill="#0095f6" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Z"/>
+          <path fill="#fff" d="m17.2 27.4-5-5 2-2 3 3 8-8.2 2 2z"/>
+        </svg>
+      </div>
+      <span class="role-chip">Admin Lab/Web</span>
+    </div>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><b id="postCount">6</b> <span>Posts</span></div>
+      <div class="stat" role="listitem"><b>XII TJKT 1</b> <span>Kelas</span></div>
+      <div class="stat" role="listitem"><b>02</b> <span>No. Absen</span></div>
+    </div>
+
+    <div class="bio">
+      <span class="real-name">Ananda Bagas Khalil Hadhi</span>
+      <span class="meta"><b>Admin Lab/Web</b> • Kelas <b>XII TJKT 1</b> (No. Absen: <b>2</b>)</span>
+      <p>🌐 Mengelola infrastruktur jaringan, server, dan praktikum Laboratorium TJKT.<br>🛠️ Topologi • MikroTik • Fiber Optic • Server<br>📍 Laboratorium TJKT SMK</p>
+      <a class="link" href="https://monitor.lab-smk.xyz" target="_blank" rel="noopener noreferrer">monitor.lab-smk.xyz</a>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://monitor.lab-smk.xyz" target="_blank" rel="noopener noreferrer">Monitor</a>
+      <button class="btn btn-secondary" type="button" id="shareBtn">Bagikan</button>
+    </div>
+  </section>
+
+  <!-- ===== Highlights ===== -->
+  <section class="highlights" id="highlights" aria-label="Story Highlights"></section>
+
+  <!-- ===== Tabs ===== -->
+  <div class="tabs">
+    <div class="tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dokumentasi
+    </div>
+  </div>
+
+  <!-- ===== Feed Grid ===== -->
+  <section class="grid" id="grid" aria-label="Feed dokumentasi Lab"></section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-title">Pantau Server Laboratorium</div>
+    <p class="footer-sub">Lihat status server dan layanan jaringan Lab TJKT secara langsung melalui dashboard monitoring.</p>
+    <a class="monitor-btn" href="https://monitor.lab-smk.xyz" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M7 21h10M12 17v4M6 11l3-3 3 3 4-4"/></svg>
+      <span>Buka Server Monitor (monitor.lab-smk.xyz)</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="copy">© <span id="year">2026</span> lab-smk.xyz • Admin Lab/Web: Ananda Bagas Khalil Hadhi • XII TJKT 1 • Absen 2</p>
+  </div>
+</footer>
+
+<!-- ===== Story Modal ===== -->
+<div class="modal" id="storyModal" role="dialog" aria-modal="true" aria-label="Story Highlight">
+  <button class="modal-close" type="button" data-close="story" aria-label="Tutup">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <div class="story" id="story">
+    <div class="story-bg" id="storyBg"></div>
+    <div class="story-bars" id="storyBars"></div>
+    <div class="story-head">
+      <div class="mini-av"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="6" width="30" height="13" rx="3"/><rect x="9" y="24" width="30" height="13" rx="3"/></svg></div>
+      <div><b>lab-smk.xyz</b><small id="storyTitle"></small></div>
+    </div>
+    <div class="story-body" id="storyBody"></div>
+    <div class="story-zones" id="storyZones"><div data-dir="-1"></div><div data-dir="1"></div></div>
+    <div class="story-cta">Ketuk kiri/kanan untuk berpindah • tahan untuk jeda</div>
+  </div>
+</div>
+
+<!-- ===== Post Modal ===== -->
+<div class="modal" id="postModal" role="dialog" aria-modal="true" aria-label="Detail postingan">
+  <button class="modal-close" type="button" data-close="post" aria-label="Tutup">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <article class="post" id="post">
+    <div class="post-media" id="postMedia" title="Ketuk dua kali untuk menyukai">
+      <div class="art" id="postArt"></div>
+      <div class="big-icon" id="postIcon"></div>
+      <div class="media-label" id="postLabel"></div>
+      <svg class="burst" id="burst" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <div class="post-side">
+      <div class="post-top">
+        <div class="tiny-ring"><div><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="6" width="30" height="13" rx="3"/><rect x="9" y="24" width="30" height="13" rx="3"/></svg></div></div>
+        <div class="who">lab-smk.xyz
+          <svg viewBox="0 0 40 40"><path fill="#0095f6" d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Z"/><path fill="#fff" d="m17.2 27.4-5-5 2-2 3 3 8-8.2 2 2z"/></svg>
+        </div>
+      </div>
+      <div class="post-scroll">
+        <div class="caption-row"><b>lab-smk.xyz</b><span id="postCaption"></span><span class="tags" id="postTags"></span></div>
+        <div id="postComments"></div>
+      </div>
+      <div class="post-actions">
+        <button class="act like" id="likeBtn" type="button" aria-label="Suka" aria-pressed="false">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </button>
+        <button class="act" id="shareFeedBtn" type="button" aria-label="Bagikan">
+          <svg viewBox="0 0 24 24"><path d="M22 3L9.2 10.8M22 3l-7 18-5.8-10.2L3 8z"/></svg>
+        </button>
+        <button class="act save" id="saveBtn" type="button" aria-label="Simpan" aria-pressed="false">
+          <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>
+        </button>
+      </div>
+      <div class="likes" id="postLikes"></div>
+      <div class="when" id="postWhen"></div>
+    </div>
+  </article>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function safeGet(key) { try { return window.localStorage.getItem(key); } catch (e) { return null; } }
+  function safeSet(key, val) { try { window.localStorage.setItem(key, val); } catch (e) { /* abaikan */ } }
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+
+  /* ---------- Ikon SVG (stroke) ---------- */
+  var ICONS = {
+    server: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="6" width="34" height="11" rx="3"/><rect x="7" y="21" width="34" height="11" rx="3"/><rect x="7" y="36" width="34" height="7" rx="3"/><circle cx="13" cy="11.5" r="1.4" fill="currentColor"/><circle cx="13" cy="26.5" r="1.4" fill="currentColor"/><path d="M33 11.5h4M33 26.5h4"/></svg>',
+    topology: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="9" r="5"/><circle cx="9" cy="38" r="5"/><circle cx="39" cy="38" r="5"/><circle cx="24" cy="26" r="3.5"/><path d="M24 14v8.5M21.5 28.5L12.5 34.5M26.5 28.5l9 6"/></svg>',
+    router: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="26" width="38" height="14" rx="4"/><circle cx="13" cy="33" r="1.4" fill="currentColor"/><circle cx="19" cy="33" r="1.4" fill="currentColor"/><path d="M33 33h6M12 26L8 12M36 26l4-14"/><path d="M18 18a9 9 0 0 1 12 0M14 13a15 15 0 0 1 20 0"/></svg>',
+    fiber: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 34c8-18 14 6 22-12s14 6 18-8"/><path d="M4 40c8-18 14 6 22-12s14 6 18-8" opacity=".55"/><path d="M4 28c8-18 14 6 22-12s14 6 18-8" opacity=".55"/><circle cx="44" cy="8" r="2" fill="currentColor"/></svg>',
+    cable: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8h22v16h-4v8H17v-8h-4z"/><path d="M19 8v8M24 8v8M29 8v8"/><path d="M24 32v8c0 3 3 4 6 4h10"/></svg>',
+    shield: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l16 6v11c0 10-6.5 17-16 21C14.500 39 8 32 8 22V11z"/><path d="M17 24l5 5 9-10"/></svg>',
+    monitor: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="40" height="27" rx="3"/><path d="M17 42h14M24 34v8M10 26l8-8 6 6 8-10 6 6"/></svg>'
+  };
+  var HEART_PATH = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+  var CHAT_PATH = '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/></svg>';
+  var MULTI_ICON = '<svg class="cell-tag" viewBox="0 0 24 24" fill="#fff"><rect x="7" y="3" width="14" height="14" rx="2.5" opacity=".6"/><rect x="3" y="7" width="14" height="14" rx="2.5"/></svg>';
+
+  /* ---------- Data Highlights ---------- */
+  var HIGHLIGHTS = [
+    {
+      name: "Topologi", icon: "topology", bg: "linear-gradient(160deg,#4776e6,#8e54e9)",
+      slides: [
+        { title: "Topologi Star", text: "Semua perangkat terhubung ke satu switch pusat. Mudah dikelola dan mudah dilacak jika terjadi gangguan." },
+        { title: "Topologi Tree", text: "Gabungan beberapa topologi star dalam hirarki, cocok untuk jaringan lab yang terbagi per ruangan." },
+        { title: "Dokumentasi Jaringan", text: "Setiap perubahan topologi dicatat agar praktikum berikutnya tetap konsisten." }
+      ]
+    },
+    {
+      name: "MikroTik", icon: "router", bg: "linear-gradient(160deg,#11998e,#38ef7d)",
+      slides: [
+        { title: "RouterOS & Winbox", text: "Konfigurasi router MikroTik lewat Winbox: IP address, DHCP server, dan NAT." },
+        { title: "Firewall & Queue", text: "Atur filter rule dan simple queue untuk membatasi bandwidth tiap kelompok praktikum." },
+        { title: "Backup Konfigurasi", text: "Selalu ekspor konfigurasi sebelum praktikum baru dimulai." }
+      ]
+    },
+    {
+      name: "Fiber Optic", icon: "fiber", bg: "linear-gradient(160deg,#f7971e,#ffd200)",
+      slides: [
+        { title: "Kabel Fiber Optik", text: "Mengenal single mode dan multi mode, serta konektor SC, LC, dan FC." },
+        { title: "Splicing & Terminasi", text: "Latihan penyambungan serat dengan fusion splicer secara bertahap dan hati-hati." },
+        { title: "Pengukuran Redaman", text: "Uji kualitas sambungan memakai power meter dan OTDR." }
+      ]
+    },
+    {
+      name: "Server", icon: "server", bg: "linear-gradient(160deg,#0f2027,#2c5364)",
+      slides: [
+        { title: "Server Lab", text: "Server Linux menjalankan layanan web, DNS, dan file sharing untuk praktikum." },
+        { title: "Monitoring Layanan", text: "Status server dipantau terus lewat monitor.lab-smk.xyz." },
+        { title: "Backup Berkala", text: "Data penting dicadangkan terjadwal supaya aman dari kegagalan." }
+      ]
+    },
+    {
+      name: "Tata Tertib", icon: "shield", bg: "linear-gradient(160deg,#dc2743,#bc1888)",
+      slides: [
+        { title: "Sebelum Praktikum", text: "Rapikan tas, cek perangkat, dan laporkan kerusakan kepada Admin Lab." },
+        { title: "Selama Praktikum", text: "Jaga kebersihan, gunakan perangkat sesuai petunjuk, dan jangan mengubah konfigurasi di luar tugas." },
+        { title: "Setelah Praktikum", text: "Cabut kabel yang tidak dipakai, matikan perangkat, dan rapikan meja." }
+      ]
+    }
+  ];
+
+  /* ---------- Data Posts ---------- */
+  var POSTS = [
+    {
+      title: "Topologi Jaringan Lab", icon: "topology",
+      grad: "linear-gradient(135deg,#4776e6 0%,#8e54e9 100%)", likes: 128, multi: true,
+      caption: "Rancangan topologi star untuk jaringan Lab TJKT. Satu switch utama menghubungkan seluruh PC praktikum dengan rapi.",
+      tags: "#TJKT #Topologi #JaringanKomputer #LabSMK", when: "2 hari lalu",
+      comments: [["rizky.tjkt", "Rapi banget kabelnya 🔥"], ["nadia_xii", "Boleh minta file topologinya?"]]
+    },
+    {
+      title: "Konfigurasi MikroTik", icon: "router",
+      grad: "linear-gradient(135deg,#11998e 0%,#38ef7d 100%)", likes: 241, multi: false,
+      caption: "Praktikum konfigurasi dasar MikroTik: IP address, DHCP, NAT, dan firewall rule lewat Winbox.",
+      tags: "#MikroTik #RouterOS #Winbox #TJKT", when: "4 hari lalu",
+      comments: [["dimas.net", "Mantap, NAT-nya sudah jalan?"], ["lab.admin", "Sudah, tinggal uji koneksi ke internet."]]
+    },
+    {
+      title: "Instalasi Fiber Optik", icon: "fiber",
+      grad: "linear-gradient(135deg,#f7971e 0%,#ffd200 100%)", likes: 187, multi: true,
+      caption: "Latihan terminasi dan splicing kabel fiber optik. Presisi dan kesabaran adalah kuncinya.",
+      tags: "#FiberOptic #Splicing #TJKT", when: "1 minggu lalu",
+      comments: [["salsa_tkj", "Hasil redamannya berapa dB?"], ["fajar.xii", "Keren, jadi pengen coba!"]]
+    },
+    {
+      title: "Rack Server Lab", icon: "server",
+      grad: "linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%)", likes: 312, multi: false,
+      caption: "Rack server Lab yang menjalankan layanan web, DNS, dan monitoring. Dipantau 24 jam lewat dashboard.",
+      tags: "#Server #Linux #Monitoring #LabOnline", when: "1 minggu lalu",
+      comments: [["bagas.dev", "Uptime aman terkendali ✅"], ["wahyu.net", "Dashboard-nya bisa diakses dari mana?"]]
+    },
+    {
+      title: "Crimping Kabel UTP", icon: "cable",
+      grad: "linear-gradient(135deg,#ee0979 0%,#ff6a00 100%)", likes: 96, multi: false,
+      caption: "Belajar crimping kabel UTP standar T568B. Urutan warna benar, koneksi pun lancar.",
+      tags: "#UTP #RJ45 #Crimping #TJKT", when: "2 minggu lalu",
+      comments: [["ayu.xii", "Tester-nya lampu hijau semua 👍"], ["raka_net", "Straight atau crossover nih?"]]
+    },
+    {
+      title: "Tata Tertib Lab", icon: "shield",
+      grad: "linear-gradient(135deg,#dc2743 0%,#bc1888 100%)", likes: 154, multi: true,
+      caption: "Pengingat tata tertib Lab TJKT: jaga kebersihan, rawat perangkat, dan laporkan kendala kepada Admin Lab.",
+      tags: "#TataTertib #K3 #LabTJKT", when: "3 minggu lalu",
+      comments: [["mila.tkj", "Siap, noted!"], ["lab.admin", "Terima kasih sudah tertib 🙌"]]
+    }
+  ];
+
+  var state = { liked: {}, saved: {}, current: -1 };
+  var likeSnapshot = POSTS.map(function (p) { return p.likes; });
+
+  /* ---------- Tema ---------- */
+  var root = document.documentElement;
+  var metaTheme = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    if (metaTheme) metaTheme.setAttribute("content", t === "dark" ? "#000000" : "#ffffff");
+  }
+  var savedTheme = safeGet("lab-smk-theme");
+  if (savedTheme !== "dark" && savedTheme !== "light") {
+    savedTheme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  applyTheme(savedTheme);
+  $("themeToggle").addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    safeSet("lab-smk-theme", next);
+  });
+
+  $("year").textContent = new Date().getFullYear();
+  $("postCount").textContent = POSTS.length;
+
+  /* ---------- Render Highlights ---------- */
+  var hlWrap = $("highlights");
+  HIGHLIGHTS.forEach(function (h, i) {
+    var el = document.createElement("button");
+    el.type = "button";
+    el.className = "hl";
+    el.setAttribute("aria-label", "Buka highlight " + h.name);
+    el.innerHTML =
+      '<div class="hl-ring"><div class="hl-inner" style="background:' + h.bg + '">' + ICONS[h.icon] + '</div></div>' +
+      '<span>' + h.name + '</span>';
+    el.addEventListener("click", function () { el.classList.add("seen"); openStory(i); });
+    hlWrap.appendChild(el);
+  });
+
+  /* ---------- Render Grid ---------- */
+  var grid = $("grid");
+  POSTS.forEach(function (p, i) {
+    var cell = document.createElement("div");
+    cell.className = "cell";
+    cell.tabIndex = 0;
+    cell.setAttribute("role", "button");
+    cell.setAttribute("aria-label", "Buka postingan: " + p.title);
+    cell.innerHTML =
+      '<div class="cell-art" style="background:' + p.grad + '"></div>' +
+      '<div class="cell-icon">' + ICONS[p.icon] + '</div>' +
+      (p.multi ? MULTI_ICON : '') +
+      '<div class="cell-hover"><span>' + HEART_PATH + '<em data-likes style="font-style:normal">' + fmt(p.likes) + '</em></span><span>' + CHAT_PATH + p.comments.length + '</span></div>';
+    cell.addEventListener("click", function () { openPost(i); });
+    cell.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPost(i); }
+    });
+    grid.appendChild(cell);
+  });
+  function refreshGridLikes() {
+    var cells = grid.children;
+    for (var i = 0; i < cells.length; i++) {
+      var em = cells[i].querySelector("[data-likes]");
+      if (em) em.textContent = fmt(POSTS[i].likes);
+    }
+  }
+
+  /* ---------- Modal umum ---------- */
+  var storyModal = $("storyModal");
+  var postModal = $("postModal");
+  var lastFocus = null;
+
+  function lockScroll(lock) { document.body.classList.toggle("no-scroll", lock); }
+  function showModal(m) { lastFocus = document.activeElement; m.classList.add("open"); lockScroll(true); }
+  function hideModal(m) {
+    m.classList.remove("open");
+    if (!storyModal.classList.contains("open") && !postModal.classList.contains("open")) lockScroll(false);
+    if (lastFocus && typeof lastFocus.focus === "function") { try { lastFocus.focus(); } catch (e) { /* abaikan */ } }
+  }
+  function closeStory() { stopStoryTimer(); hideModal(storyModal); }
+  function closePost() { hideModal(postModal); state.current = -1; }
+
+  [].forEach.call(document.querySelectorAll("[data-close]"), function (btn) {
+    btn.addEventListener("click", function () {
+      if (btn.getAttribute("data-close") === "story") closeStory(); else closePost();
+    });
+  });
+  [storyModal, postModal].forEach(function (m) {
+    m.addEventListener("click", function (e) {
+      if (e.target === m) { if (m === storyModal) closeStory(); else closePost(); }
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      if (storyModal.classList.contains("open")) closeStory();
+      else if (postModal.classList.contains("open")) closePost();
+    } else if (storyModal.classList.contains("open")) {
+      if (e.key === "ArrowRight") nextSlide(1);
+      if (e.key === "ArrowLeft") nextSlide(-1);
+    }
+  });
+
+  /* ---------- Story logic ---------- */
+  var sIdx = 0, slideIdx = 0;
+  var storyEl = $("story");
+
+  function stopStoryTimer() { storyEl.classList.remove("paused"); }
+
+  function openStory(i) {
+    sIdx = i; slideIdx = 0;
+    showModal(storyModal);
+    renderSlide();
+  }
+
+  function renderSlide() {
+    var h = HIGHLIGHTS[sIdx];
+    var slide = h.slides[slideIdx];
+    $("storyBg").style.background = h.bg;
+    $("storyTitle").textContent = h.name;
+    var bars = $("storyBars");
+    bars.innerHTML = "";
+    h.slides.forEach(function (_, k) {
+      var b = document.createElement("div");
+      b.className = "bar" + (k < slideIdx ? " done" : (k === slideIdx ? " active" : ""));
+      b.innerHTML = "<i></i>";
+      bars.appendChild(b);
+    });
+    var active = bars.querySelector(".bar.active i");
+    if (active) {
+      active.addEventListener("animationend", function () { nextSlide(1); }, { once: true });
+    }
+    var body = $("storyBody");
+    body.innerHTML =
+      '<div class="story-icon">' + ICONS[h.icon] + '</div>' +
+      '<h3></h3><p></p>';
+    body.querySelector("h3").textContent = slide.title;
+    body.querySelector("p").textContent = slide.text;
+  }
+
+  function nextSlide(dir) {
+    if (!storyModal.classList.contains("open")) return;
+    var h = HIGHLIGHTS[sIdx];
+    var n = slideIdx + dir;
+    if (n < 0) { slideIdx = 0; renderSlide(); return; }
+    if (n >= h.slides.length) {
+      // lanjut ke highlight berikutnya atau tutup
+      if (sIdx < HIGHLIGHTS.length - 1) {
+        sIdx += 1; slideIdx = 0;
+        var btns = hlWrap.children;
+        if (btns[sIdx]) btns[sIdx].classList.add("seen");
+        renderSlide();
+      } else { closeStory(); }
+      return;
+    }
+    slideIdx = n;
+    renderSlide();
+  }
+
+  [].forEach.call($("storyZones").children, function (z) {
+    z.addEventListener("click", function () { nextSlide(parseInt(z.getAttribute("data-dir"), 10)); });
+  });
+  var holdTimer = null;
+  function pauseStory() { storyEl.classList.add("paused"); }
+  function resumeStory() { storyEl.classList.remove("paused"); }
+  $("storyZones").addEventListener("pointerdown", function () {
+    clearTimeout(holdTimer);
+    holdTimer = setTimeout(pauseStory, 180);
+  });
+  ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+    $("storyZones").addEventListener(ev, function () { clearTimeout(holdTimer); resumeStory(); });
+  });
+
+  /* ---------- Post logic ---------- */
+  var likeBtn = $("likeBtn");
+  var saveBtn = $("saveBtn");
+  var burst = $("burst");
+
+  function renderLikeState() {
+    var i = state.current;
+    if (i < 0) return;
+    var liked = !!state.liked[i];
+    likeBtn.classList.toggle("liked", liked);
+    likeBtn.setAttribute("aria-pressed", liked ? "true" : "false");
+    $("postLikes").textContent = fmt(POSTS[i].likes) + " suka";
+    refreshGridLikes();
+  }
+
+  function setLike(i, value) {
+    if (!!state.liked[i] === value) return;
+    state.liked[i] = value;
+    POSTS[i].likes = likeSnapshot[i] + (value ? 1 : 0);
+    renderLikeState();
+  }
+
+  function playBurst() {
+    burst.classList.remove("go");
+    void burst.getBoundingClientRect(); // reflow agar animasi bisa diulang
+    burst.classList.add("go");
+  }
+
+  function openPost(i) {
+    var p = POSTS[i];
+    state.current = i;
+    $("postArt").style.background = p.grad;
+    $("postIcon").innerHTML = ICONS[p.icon];
+    $("postLabel").textContent = p.title;
+    $("postCaption").textContent = p.caption;
+    $("postTags").textContent = p.tags;
+    $("postWhen").textContent = p.when;
+    var cm = $("postComments");
+    cm.innerHTML = "";
+    p.comments.forEach(function (c) {
+      var d = document.createElement("div");
+      d.className = "cmt";
+      var b = document.createElement("b");
+      b.textContent = c[0];
+      d.appendChild(b);
+      d.appendChild(document.createTextNode(c[1]));
+      cm.appendChild(d);
+    });
+    var saved = !!state.saved[i];
+    saveBtn.classList.toggle("saved", saved);
+    saveBtn.setAttribute("aria-pressed", saved ? "true" : "false");
+    burst.classList.remove("go");
+    renderLikeState();
+    showModal(postModal);
+  }
+
+  likeBtn.addEventListener("click", function () {
+    var i = state.current;
+    if (i < 0) return;
+    setLike(i, !state.liked[i]);
+  });
+
+  saveBtn.addEventListener("click", function () {
+    var i = state.current;
+    if (i < 0) return;
+    state.saved[i] = !state.saved[i];
+    saveBtn.classList.toggle("saved", !!state.saved[i]);
+    saveBtn.setAttribute("aria-pressed", state.saved[i] ? "true" : "false");
+  });
+
+  // Double-tap / double-click pada media untuk menyukai
+  var lastTap = 0;
+  $("postMedia").addEventListener("click", function () {
+    var now = Date.now();
+    if (now - lastTap < 350) {
+      var i = state.current;
+      if (i >= 0) { setLike(i, true); playBurst(); }
+      lastTap = 0;
+    } else {
+      lastTap = now;
+    }
+  });
+
+  /* ---------- Bagikan ---------- */
+  function shareLink() {
+    var data = { title: "lab-smk.xyz", text: "Laboratorium TJKT — lab-smk.xyz", url: window.location.href };
+    if (navigator.share) {
+      navigator.share(data).catch(function () { /* dibatalkan */ });
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(data.url).then(function () { alert("Tautan disalin ke clipboard."); }, function () {});
+    }
+  }
+  $("shareBtn").addEventListener("click", shareLink);
+  $("shareFeedBtn").addEventListener("click", shareLink);
+})();
+</script>
+</body>
+</html>
